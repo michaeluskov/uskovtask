@@ -113,12 +113,12 @@ var getImgNode = function(i) {
     node.id = 'photo-view-img';
     node.className = 'photo-view-img';
     node.alt = 'Photo';
-    node.src = photos[i][2];
     node.onload = function() {
         isLoaded[i] = true;
         if (currentPhoto == i) 
             document.getElementById('photo-view-loading').style.display = 'none';
     };
+    node.src = photos[i][2];
     return node;
 };
 
