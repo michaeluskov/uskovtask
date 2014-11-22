@@ -1,0 +1,36 @@
+{% extends 'uskovapp/base.html' %}
+{% load staticfiles %}
+
+{% block 'title' %}Фотогалерея{% endblock %}
+
+{% block 'head-extra' %}
+    <script type="text/javascript" src="{% static 'photo/js/photo.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'photo/css/photo.css' %}">
+{% endblock %}
+
+{% block 'content' %}
+    <div id="photo-thumb-space" class="photo-thumb-space"></div>
+    <div id="photo-thumb-clear-start-photo" class="photo-thumb-menu-link">Удалить стартовую фотографию</div>
+    <div id="photo-thumb-clear-background" class="photo-thumb-menu-link">Удалить фоновую фотографию</div>
+    <div id="photo-help" class="photo-help">
+        <b>ESC</b> - Выход
+        <br><b>Стрелка вправо</b> - Следующая фотография
+        <br><b>Стрелка влево</b> - Предыдущая фотография
+        <br><b>F5</b> - Открывать эту фотографию при загрузке
+        <br><b>F4</b> - Стереть информацию о фото при загрузке
+        <br><b>F6</b> - Использовать фотографию в качестве фона
+        <br><b>F7</b> - Использовать стандартный фон
+    </div>
+    <div id="photo-bubble" class="photo-bubble">Я бублик</div>
+    <div id="photo-view" class="photo-view">
+        <div class="photo-view-bg">
+            <div class="photo-view-border" id="photo-view-border">
+                <div id="photo-view-close-cross" class="photo-view-close-cross"></div>
+                <div id="photo-view-left-button" class="photo-view-left-button"></div>
+                <div id="photo-view-right-button" class="photo-view-right-button"></div> 
+                <div id="photo-view-space" class="photo-view-space"></div>
+                <img id="photo-view-loading" class="photo-view-loading" src="{% static 'photo/icons/loading.gif' %}" alt="Loading">
+            </div>
+        </div>
+    </div>
+{% endblock %}

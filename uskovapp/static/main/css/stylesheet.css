@@ -1,0 +1,153 @@
+@import url(http://fonts.googleapis.com/css?family=Noto+Sans&subset=latin,cyrillic,cyrillic-ext,latin-ext);
+
+
+@media screen {
+	body {
+		font-family: 'Noto Sans', sans-serif;
+	}
+
+	.left-top-corner {
+		position: absolute;
+		margin: 0;
+		border: none;
+		padding: 0;
+		top: -1px;
+		left: -1px;
+		width: 6px;
+		height: 6px;
+		background: url(/static/main/icons/cornersprite.png) 0 0;
+	}
+
+	.right-top-corner {
+		position: absolute;
+		margin: 0;
+		border: none;
+		padding: 0;
+		top: -1px;
+		right: -1px;
+		width: 6px;
+		height: 6px;
+		background: url(/static/main/icons/cornersprite.png) 6px 0;
+	}
+
+	.left-bottom-corner {
+		position: absolute;
+		margin: 0;
+		border: none;
+		padding: 0;
+		bottom: -1px;
+		left: -1px;
+		width: 6px;
+		height: 6px;
+		background: url(/static/main/icons/cornersprite.png) 0 6px;
+	}
+
+	.right-bottom-corner {
+		position: absolute;
+		margin: 0;
+		border: none;
+		padding: 0;
+		bottom: -1px;
+		right: -1px;
+		width: 6px;
+		height: 6px;
+		background: url(/static/main/icons/cornersprite.png) 6px 6px;
+	}
+
+	.container {
+		width: 800px; 
+		margin: 0 auto;
+	   }
+
+	.left-column { 
+		position: relative;	
+		border: 1px solid;
+		float: left;
+		width: 200px;
+		margin: 3px;
+		padding: 5px;
+		background: #f0f0f0;
+		color: #996600;
+	}
+
+	.left-column a:link, .left-column a:visited, .left-column a:hover, .left-column a:active {
+		color: #996600;
+		text-decoration: none;
+	}
+
+	.right-column { 
+		position: relative;
+		margin-top: 5px;
+		border: 1px solid;
+		margin-left: 220px; 
+		background: #ffffff;
+		color: #663300;
+		padding: 10px;
+		
+	}
+
+	.right-column a:link, .right-column a:visited, .right-column a:hover, .right-column a:active {
+		color: #996600;
+		text-decoration: none;
+	}
+	
+	.right-column .profile-photo {
+		position: absolute;
+		top: 15px;
+		right: 15px;
+		padding: 5px;
+		border: 1px solid;
+	}
+
+	.header {
+		position: relative;
+		border: 1px solid;
+		text-align: center; 
+		font-size: 2.2em;
+		padding: 5px; 
+		background: #FFFFCC;
+		color: #996600;
+	   }
+	   
+	.header a:link, .header a:visited, .header a:hover, .header a:active {
+		color: #996600;
+		text-decoration: none;
+	}	
+}
+
+@media screen and (max-width: 800px) {
+
+	
+	.container {
+		width: 100%;
+	}
+	
+	.left-column {
+		float: none;
+		width: auto;
+		margin: 1px 0px 1px 0px !important;
+		padding: 1px !important;
+	}
+	
+	.right-column .profile-photo {
+		position: relative;
+		top: auto;
+		right: auto;
+		border: 1px solid;
+		margin: 1px 0px 1px 0px !important;
+		padding: 1px !important;
+	}
+	
+	.right-column {
+		margin: 1px 0px 1px 0px !important;
+		padding: 1px !important;	
+	}
+	
+
+	.left-bottom-corner, .left-top-corner, .right-bottom-corner, .right-top-corner {
+		display: none;
+	}
+	
+	
+	
+}
