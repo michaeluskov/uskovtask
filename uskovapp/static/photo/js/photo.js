@@ -108,6 +108,7 @@ var toggleHelp = function() {
 };
 
 var getImgNode = function(i) {
+    i = parseInt(i);
     if (i<0 || i>=photos.length) return;
     var node = document.createElement('IMG');
     node.id = 'photo-view-img';
@@ -248,7 +249,7 @@ var init = function() {
     fillThumbSpace();
     document.getElementById('photo-thumb-clear-start-photo').onclick = deleteStartPhoto;
     document.getElementById('photo-thumb-clear-background').onclick = deleteBgPhoto;
-    if (document.location.hash != '') {
+    if (document.location.hash != '' && document.location.hash != '#') {
         showPhotoFromHash();
     } else if (getCookie('start-photo')) {
         enableViewMode();
