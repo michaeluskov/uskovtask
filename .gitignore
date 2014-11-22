@@ -1,0 +1,7 @@
+/*.wpu
+/UskovTask.wpr
+/*.sqlite3
+/uskovtask/settings_dev.py
+/uskovtask/settings_dev.pyc
+/uskovtask/settings_prod.py
+/uskovtask/settings_prod.pyc
