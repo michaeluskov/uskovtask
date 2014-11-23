@@ -1,10 +1,9 @@
 var photos = [
                 ['armin', 'http://cs620423.vk.me/v620423922/113e1/Fjb_p_5r2ak.jpg', 'http://cs620423.vk.me/v620423922/113e0/VD0Cd6xU0mo.jpg'],
-                ['zhigul', 'http://cs619429.vk.me/v619429386/f9b7/coyHubKDWyY.jpg', 'http://cs619429.vk.me/v619429386/f9b5/CmBxNFZbDHc.jpg'],
-                ['fans', 'http://cs618730.vk.me/v618730819/e556/71PFBUz-oNM.jpg', 'http://cs540102.vk.me/c618730/v618730819/e554/DTrOcnxPg1w.jpg'],
-                ['gohere', 'http://cs540102.vk.me/c540105/v540105067/b7b8/rjwZsip_zmg.jpg', 'http://cs540102.vk.me/c540105/v540105067/b7b7/-hfJioJ6JZo.jpg'],
-                ['vaenga', 'http://cs308425.vk.me/v308425426/1ccc/6elTii-bpsA.jpg', 'http://cs308425.vk.me/v308425426/1ccb/BtLoyK8W2L8.jpg'],
-                ['voronin', 'http://cs625429.vk.me/v625429642/41e/zTb3H17p6mM.jpg', 'http://cs625429.vk.me/v625429642/41d/xEmfH3uSS3g.jpg']
+                ['voronin', 'http://cs625429.vk.me/v625429642/41e/zTb3H17p6mM.jpg', 'http://cs625429.vk.me/v625429642/41d/xEmfH3uSS3g.jpg'],
+                ['risovach', 'http://risovach.ru/upload/2013/06/generator/udivlenie_22496303_orig_.jpeg', 'http://risovach.ru/upload/2013/06/generator/udivlenie_22496303_orig_.jpeg'],
+                ['obama', 'http://www.lie-emotions.com.ua/stati/POL/3/udivlenie_ehmocija.jpg', 'http://www.lie-emotions.com.ua/stati/POL/3/udivlenie_ehmocija.jpg'],
+                ['kirkorov', 'http://risovach.ru/upload/2012/05/templ_1338476285_orig_Udivlenie.jpg', 'http://risovach.ru/upload/2012/05/templ_1338476285_orig_Udivlenie.jpg']
              ];
              
 var thumbs = [];
