@@ -276,11 +276,15 @@ var stopPropagation = function(e) {
     else e.cancelBubble = true;
 };
 
-if (window.addEventListener) {
-    window.addEventListener('load', init);
-} else {
-    window.attachEvent('onload', init);    
-}
+var addEvent = function(event, handler) {
+    if (window.addEventListener) {
+        window.addEventListener(event, handler);
+    } else {
+        window.attachEvent('on' + event, handler);    
+    }
+};
+
+addEvent('load', init)
 
 var ie8DirtyHacks = function() {
     if ('attachEvent' in window) {
