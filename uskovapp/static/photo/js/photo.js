@@ -114,11 +114,11 @@ var getImgNode = function(i) {
     node.id = 'photo-view-img';
     node.className = 'photo-view-img';
     node.alt = 'Photo';
-    node.onload = function() {
+    addEvent(node, 'load', function() {
         isLoaded[i] = true;
         if (currentPhoto == i) 
             document.getElementById('photo-view-loading').style.display = 'none';
-    };
+    });
     node.src = photos[i][2];
     return node;
 };
