@@ -41,6 +41,11 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'uskovapp.middlewares.VisitsMiddleware'
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'uskovapp.context_processors.addstats',
 )
 
 ROOT_URLCONF = 'uskovtask.urls'
