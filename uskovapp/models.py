@@ -9,5 +9,6 @@ class Visits(models.Model):
     datetime = models.DateTimeField(auto_now_add=True)
     
     def __unicode__(self):
-        return "%s : %s (%s)" % (unicode(self.ip), unicode(self.datetime), 
+        return "%s : %s (%s)" % (unicode(self.ip), 
+                                 unicode(self.datetime.strftime('%d/%m/%y %H:%M:%S')), 
                                  unicode(self.url))
