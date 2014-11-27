@@ -38,6 +38,9 @@ class VisitsHandler:
                 if (allvisits[second] - allvisits[first] >= timedelta(minutes=5)):
                     sessions.append({'ip': ip, 'datetime': allvisits[second]})
         return sessions
+
+    def getAllSessions(self):
+        return self.query
       
     def getAllIPsCount(self):
         ips = {}
@@ -55,7 +58,7 @@ class VisitsHandler:
                 sessions.append(x)
         return sessions
        
-    def getLastSession(self, request):
+    def getLastSession(self):
         maxdatetime = datetime(1970, 1, 1)
         for x in self.query:
             if x['datetime'] > maxdatetime:
@@ -63,9 +66,11 @@ class VisitsHandler:
         return maxdatetime.strftime('%d.%m.%y %H:%M:%S')
 
     def getImage(self):
-        image = PIL.Image.new('RGB', (50, 30), '#ffffff')
+        image = PIL.Image.new('RGB', (150, 30), '#ffffff')
         draw = PIL.ImageDraw.Draw(image)
-        draw.text((10,0), str(self.getAllHitsCount()), '#000000')
+        draw.text((0,0), 'Total: '+ str(len(self.getAllSessions())), '#000000')
+        draw.text((0,10), 'Today: '+ str(len(self.getTodaySessions())), '#000000')
+        draw.text((0,20), 'Last: '+ str(self.getLastSession()), '#000000')
         string = StringIO.StringIO()
         image.save(string, 'PNG')
         return string.getvalue()
