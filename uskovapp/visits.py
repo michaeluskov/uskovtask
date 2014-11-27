@@ -9,11 +9,20 @@ def addNewVisit(request):
     visit.datetime = datetime.now()
     visit.save()    
     
-def getSessionsQuerySet():
+    
+def getSessionsQuerySet(customFilterForIP={}, customFilterForDates={}):
     sessions = []
-    for ip in Visits.objects.values('ip').order_by().distinct():
+    if len(customFilterForIP) > 0:
+        query = Visits.objects.filter(**customFilter).values('ip').order_by().distinct()
+    else:
+        query = Visits.objects.values('ip').order_by().distinct()
+    for ip in query:
         ip = ip['ip']
-        allvisits = list(Visits.objects.filter(ip__exact=ip).values('datetime'))
+        if len(customFilterForDates) > 0:
+            datetimeQuery = Visits.objects.filter(ip__exact=ip, **customFilterForDates).values('datetime')
+        else:
+            datetimeQuery = Visits.objects.filter(ip__exact=ip).values('datetime')
+        allvisits = list(datetimeQuery)
         sessions.append({'ip': ip, 'datetime': allvisits[0]})
         allvisits = [i['datetime'] for i in allvisits]
         for second in xrange(1, len(allvisits)):
@@ -22,8 +31,11 @@ def getSessionsQuerySet():
                 sessions.append({'ip': ip, 'datetime': allvisits[second]})
     return sessions
 
+
 def getAllIPsCount():
     return Visits.objects.values('ip').order_by().distinct().count()
 
+
 def getAllHitsCount():
     return Visits.objects.count()
+    
