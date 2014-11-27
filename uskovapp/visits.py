@@ -1,5 +1,8 @@
 from models import Visits
 from datetime import datetime, timedelta, date
+import PIL.Image
+import PIL.ImageDraw
+import StringIO
 
 
 def addNewVisit(request):
@@ -58,6 +61,14 @@ class VisitsHandler:
             if x['datetime'] > maxdatetime:
                 maxdatetime = x['datetime']
         return maxdatetime.strftime('%d.%m.%y %H:%M:%S')
+
+    def getImage(self):
+        image = PIL.Image.new('RGB', (50, 30), '#ffffff')
+        draw = PIL.ImageDraw.Draw(image)
+        draw.text((10,0), str(self.getAllHitsCount()), '#000000')
+        string = StringIO.StringIO()
+        image.save(string, 'PNG')
+        return string.getvalue()
 
 
     
