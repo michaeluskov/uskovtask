@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     #url(r'^admin/', include(admin.site.urls)),
 )
 
-handler404 = uskovviews.error_view
-handler403 = uskovviews.error_view
-handler500 = uskovviews.error_view
-handler400 = uskovviews.error_view
+handler404 = lambda r: uskovviews.error_view(r, 404)
+handler403 = lambda r: uskovviews.error_view(r, 403)
+handler500 = lambda r: uskovviews.error_view(r, 500)
+handler400 = lambda r: uskovviews.error_view(r, 400)

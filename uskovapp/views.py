@@ -12,6 +12,6 @@ def photo(request):
 def contacts(request):
     return render(request, 'uskovapp/contacts.html')  
 
-def error_view(request):
-    resp = render(request, 'uskovapp/error.html')
+def error_view(request, error=200):
+    resp = render(request, 'uskovapp/error.html', {'error': error})
     return resp

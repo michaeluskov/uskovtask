@@ -1,7 +1,8 @@
 {% extends 'uskovapp/base.html' %}
 
-{% block 'title' %}Ошибка{% endblock %}
+{% block 'title' %}Ошибка {{ error }}{% endblock %}
 
 {% block 'content' %}
     <h1>Что-то пошло не так :(</h1>
+    А имeнно: {{ error }}
 {% endblock %}
