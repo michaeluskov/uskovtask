@@ -3,12 +3,13 @@ import visits
 
 
 def addstats(request):
-    allvisits = visits.getAllHitsCount()
-    ips = visits.getAllIPsCount()
-    sessionsQuerySet = visits.getSessionsQuerySet()
+    visitshandler = visits.VisitsHandler()
+    allvisits = visitshandler.getAllHitsCount()
+    ips = visitshandler.getAllIPsCount()
+    sessionsQuerySet = visitshandler.getSessionsQuerySet()
     allSessions = len(sessionsQuerySet)
-    todaySessions = len(visits.getTodaySessions())
-    lastSession = visits.getLastSession(request)
+    todaySessions = len(visitshandler.getTodaySessions())
+    lastSession = visitshandler.getLastSession(request)
       
     return {
         'visits': {
