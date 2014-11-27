@@ -8,6 +8,7 @@ def addstats(request):
     sessionsQuerySet = visits.getSessionsQuerySet()
     allSessions = len(sessionsQuerySet)
     todaySessions = len(visits.getTodaySessions())
+    lastSession = visits.getLastSession(request)
       
     return {
         'visits': {
@@ -16,6 +17,7 @@ def addstats(request):
             'sessions': {
                 'all': allSessions,
                 'today': todaySessions,
+                'last': lastSession
             }
         }
     }

@@ -23,8 +23,8 @@ def getSessionsQuerySet(customFilterForIP={}, customFilterForDates={}):
         else:
             datetimeQuery = Visits.objects.filter(ip__exact=ip).values('datetime')
         allvisits = list(datetimeQuery)
-        sessions.append({'ip': ip, 'datetime': allvisits[0]})
         allvisits = [i['datetime'] for i in allvisits]
+        sessions.append({'ip': ip, 'datetime': allvisits[0]})
         for second in xrange(1, len(allvisits)):
             first = second-1
             if (allvisits[second] - allvisits[first] >= timedelta(minutes=5)):
@@ -42,4 +42,16 @@ def getAllHitsCount():
 
 def getTodaySessions():
     return getSessionsQuerySet(customFilterForDates={'datetime__gte': date.today()})
+
+
+def getLastSession(request):
+    query = getSessionsQuerySet()
+    maxdatetime = datetime(1970, 1, 1)
+    
+    for x in query:
+        if x['datetime'] > maxdatetime:
+            maxdatetime = x['datetime']
+    return maxdatetime.strftime('%d.%m.%y %H:%M:%S')
+
+
     
