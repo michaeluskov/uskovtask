@@ -1,13 +1,10 @@
 from models import Visits
+from visits import addNewVisit
 import datetime 
 
 
 class VisitsMiddleware:
     
     def process_request(self, request):
-        visit = Visits()
-        visit.ip = request.META['REMOTE_ADDR']
-        visit.url = request.path
-        visit.datetime = datetime.datetime.now()
-        visit.save()
+        addNewVisit(request)
         return None
