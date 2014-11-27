@@ -113,6 +113,17 @@
 		color: #996600;
 		text-decoration: none;
 	}	
+	
+	.footer {
+		position: relative;
+		border: 1px solid;
+		text-align: center; 
+		margin-top: 5px;
+		padding: 5px; 
+		background: #f0f0f0;
+		color: #996600;
+		clear: both;
+	}
 }
 
 @media screen and (max-width: 800px) {
