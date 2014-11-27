@@ -41,11 +41,7 @@
 				<div class="right-top-corner"></div>
 				<div class="left-bottom-corner"></div>
 				<div class="right-bottom-corner"></div>
-				Статистика: Хостов: {{ visits.ips }}, 
-				Сессий: {{ visits.sessions.all }}, 
-				Сегодня {{ visits.sessions.today }},
-				Последняя {{ visits.sessions.last }},
-				Хитов: {{ visits.all }}
+				<img src="{% url 'views_image' %}" alt="Stats">
 			</div>
 		</div>
 	</body>

@@ -9,7 +9,7 @@ urlpatterns = patterns('',
     url(r'^/?$', uskovviews.main, name='main'),
     url(r'^photo/', uskovviews.photo, name='photo'),
     url(r'^contacts/', uskovviews.contacts, name='contacts'),
-    url(r'^views/image.png', uskovviews.views_image_view, name='views_image_view')
+    url(r'^views/image.png', uskovviews.views_image_view, name='views_image')
     #url(r'^admin/', include(admin.site.urls)),
 )
 

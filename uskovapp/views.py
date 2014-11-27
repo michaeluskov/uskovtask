@@ -6,15 +6,19 @@ import visits
 
 
 def main(request):
+    visits.addNewVisit(request)
     return render(request, 'uskovapp/main.html')
 
 def photo(request):
+    visits.addNewVisit(request)
     return render(request, 'uskovapp/photo.html')
 
 def contacts(request):
+    visits.addNewVisit(request)
     return render(request, 'uskovapp/contacts.html')  
 
 def error_view(request, error=200):
+    visits.addNewVisit(request)
     resp = render(request, 'uskovapp/error.html', {'error': error})
     return resp
 
