@@ -1,12 +1,13 @@
 from models import Visits
-from visits import getSessionsQuerySet, getAllIPsCount, getAllHitsCount
+import visits
 
 
 def addstats(request):
-    allvisits = getAllHitsCount()
-    ips = getAllIPsCount()
-    sessionsQuerySet = getSessionsQuerySet()
+    allvisits = visits.getAllHitsCount()
+    ips = visits.getAllIPsCount()
+    sessionsQuerySet = visits.getSessionsQuerySet()
     allSessions = len(sessionsQuerySet)
+    todaySessions = len(visits.getTodaySessions())
       
     return {
         'visits': {
@@ -14,6 +15,7 @@ def addstats(request):
             'ips': ips,
             'sessions': {
                 'all': allSessions,
+                'today': todaySessions,
             }
         }
     }

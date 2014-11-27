@@ -1,5 +1,5 @@
 from models import Visits
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 
 def addNewVisit(request):
@@ -38,4 +38,8 @@ def getAllIPsCount():
 
 def getAllHitsCount():
     return Visits.objects.count()
+
+
+def getTodaySessions():
+    return getSessionsQuerySet(customFilterForDates={'datetime__gte': date.today()})
     
