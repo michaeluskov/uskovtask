@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from models import Visits
 from datetime import datetime, timedelta, date
 import PIL.Image
@@ -67,12 +69,12 @@ class VisitsHandler:
         return maxdatetime.strftime('%d.%m.%y %H:%M:%S')
 
     def getImage(self):
-        image = PIL.Image.new('RGB', (115, 45), '#ffffff')
+        image = PIL.Image.new('RGB', (155, 45), '#ffffff')
         font = PIL.ImageFont.truetype('uskovapp/Helvetica_Light-Normal.ttf', size=12, encoding='utf-8')
         draw = PIL.ImageDraw.Draw(image)
-        draw.text((3,3), u'Total: '+ unicode(len(self.getAllSessions())), fill='#000000', font=font)
-        draw.text((3,18), u'Today: '+ unicode(len(self.getTodaySessions())), fill='#000000', font=font)
-        draw.text((3,33), u'Last: '+ unicode(self.getLastSession()), fill='#000000', font=font)
+        draw.text((3,3), u'Всего: '+ unicode(len(self.getAllSessions())), fill='#000000', font=font)
+        draw.text((3,18), u'Сегодня: '+ unicode(len(self.getTodaySessions())), fill='#000000', font=font)
+        draw.text((3,33), u'Последний: '+ unicode(self.getLastSession()), fill='#000000', font=font)
         string = StringIO.StringIO()
         image.save(string, 'PNG')
         return string.getvalue()
