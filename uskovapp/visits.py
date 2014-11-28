@@ -2,6 +2,7 @@
 
 from models import Visits
 from datetime import datetime, timedelta, date
+import user_agents
 import PIL.Image
 import PIL.ImageDraw
 import PIL.ImageFont
@@ -13,8 +14,11 @@ def addNewVisit(request):
         visit.ip = request.META['REMOTE_ADDR']
         visit.url = request.path
         visit.datetime = datetime.now()
-        visit.save()    
-        
+        ua = user_agents.parse(request.META['HTTP_USER_AGENT'])
+        visit.browser_name = ua.browser.family
+        visit.browser_version = ua.browser.version_string
+        visit.save()
+
 
 class VisitsHandler:
     
