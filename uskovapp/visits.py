@@ -2,6 +2,7 @@
 
 from models import Visits
 from datetime import datetime, timedelta, date
+from django.db.models import F
 import user_agents
 import PIL.Image
 import PIL.ImageDraw
@@ -19,6 +20,12 @@ def addNewVisit(request):
         visit.browser_version = ua.browser.version_string
         visit.save()
 
+def addExtraInfoToVisit(request, width, height):
+        res_string = '%sx%s' % (width, height)
+        lastReq = Visits.objects.filter(ip__exact='127.0.0.1').order_by('-datetime').all()[:1][0]
+        lastReq.resolution = res_string
+        lastReq.save()
+        
 
 class VisitsHandler:
     
