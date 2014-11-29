@@ -21,7 +21,6 @@ def contacts(request):
 
 
 def error_view(request, error=200):
-    visits.addNewVisit(request)
     resp = render(request, 'uskovapp/error.html', {'error': error})
     resp.status_code = error
     return resp
