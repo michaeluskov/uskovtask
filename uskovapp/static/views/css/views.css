@@ -1,0 +1,42 @@
+.container {
+    width: 90%;
+}
+
+.views-left-list {
+    position: relative;
+    width: 300px;
+    height: 150%;
+    background: #f0f0f0;
+    margin: 5px 20px 5px 5px;
+    float: left;
+    overflow: scroll;
+}
+
+.views-left-list p {
+    cursor: pointer;
+    margin: 1px;
+}
+
+.views-right-list {
+    margin-left: 320px;
+}
+
+.views-table {
+    position: relative;
+    width: 99%;
+    border-collapse: collapse;
+}
+
+.views-table td {
+    border: 1px solid;
+    text-align: center;
+}
+
+
+.views-table-header {
+    font-weight: bold;
+}
+
+.clearer {
+    clear: both;
+}

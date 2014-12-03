@@ -8,5 +8,23 @@
 {% endblock %}
 
 {% block 'content' %}
-    <h3> Сейчас все будет</h3>
+    <div id="sessions-div" class="views-left-list">
+        {% for session in sessions_list %}
+            <p>{{ session.ip }} ({{ session.datetime|date:"j.m.Y H:i:s" }})</p>
+        {% endfor %}
+    </div>
+    <div id='requests-div' class="views-right-list">
+        <table class="views-table">
+            <tr class="views-table-header">
+                <td>Дата</td>
+                <td>IP</td>
+                <td>URL</td>
+                <td>Браузер</td>
+                <td>Разрешение</td>
+            </tr>
+            <tr>
+            </tr>
+        </table>
+    </div>
+    <div class="clearer"></div>
 {% endblock %}

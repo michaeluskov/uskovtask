@@ -27,7 +27,9 @@ def error_view(request, error=200):
 
 def views_view(request):
     visits.addNewVisit(request)
-    return render(request, 'uskovapp/views.html')
+    visitsHandler = visits.VisitsHandler()
+    sessions_list = visitsHandler.getAllSessions()
+    return render(request, 'uskovapp/views.html', {'sessions_list': sessions_list})
 
 
 def views_image_view(request):
