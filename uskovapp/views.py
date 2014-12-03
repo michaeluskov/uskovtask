@@ -33,5 +33,9 @@ def views_image_view(request):
 
 
 def views_addresolution_view(request):
-    visits.addExtraInfoToVisit(request, request.GET['width'], request.GET['height'])
+    if 'width' in request.GET and 'height' in request.GET:
+        try:
+            visits.addExtraInfoToVisit(request, int(request.GET['width']), int(request.GET['height']))
+        except:
+            pass
     return HttpResponse(content="{'status': 'OK'}", content_type='application/json')

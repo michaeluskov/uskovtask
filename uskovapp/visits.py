@@ -23,8 +23,9 @@ def addNewVisit(request):
 def addExtraInfoToVisit(request, width, height):
         res_string = '%sx%s' % (width, height)
         lastReq = Visits.objects.filter(ip__exact=request.META['REMOTE_ADDR']).order_by('-datetime').all()[:1][0]
-        lastReq.resolution = res_string
-        lastReq.save()
+        if not lastReq.resolution:
+            lastReq.resolution = res_string
+            lastReq.save()
         
 
 class VisitsHandler:
