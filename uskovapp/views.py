@@ -25,6 +25,10 @@ def error_view(request, error=200):
     resp.status_code = error
     return resp
 
+def views_view(request):
+    visits.addNewVisit(request)
+    return render(request, 'uskovapp/views.html')
+
 
 def views_image_view(request):
     visitshandler = visits.VisitsHandler()
