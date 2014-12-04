@@ -1,0 +1,9 @@
+{% for visit in visits %}
+    <tr>
+        <td>{{ visit.datetime|date:"d.m.Y H:i:s" }}</td>
+        <td>{{ visit.ip }}</td>
+        <td>{{ visit.url }}</td>
+        <td>{{ visit.browser_name }} {{ visit.browser_version }}</td>
+        <td>{{ visit.resolution }}</td>
+    </tr>
+{% endfor %}
