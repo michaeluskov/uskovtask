@@ -27,14 +27,12 @@ def error_view(request, error=200):
 
 def views_view(request):
     visits.addNewVisit(request)
-    visitsHandler = visits.VisitsHandler()
-    sessions_list = visitsHandler.getAllSessions()
+    sessions_list = visits.getAllSessions()
     return render(request, 'uskovapp/views.html', {'sessions_list': sessions_list})
 
 
 def views_image_view(request):
-    visitshandler = visits.VisitsHandler()
-    image = visitshandler.getImage()
+    image = visits.getImage()
     return HttpResponse(content=image, content_type='image/png')
 
 
