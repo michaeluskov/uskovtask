@@ -2,6 +2,7 @@
 
 from models import Visits, Sessions
 from datetime import datetime, timedelta, date
+from django.utils import timezone
 from django.db.models import F
 import user_agents
 import PIL.Image
@@ -14,13 +15,13 @@ def addNewVisit(request):
     visit = Visits()
     visit.ip = request.META['REMOTE_ADDR']
     visit.url = request.path
-    visit.datetime = datetime.now()
+    visit.datetime = timezone.now()
     ua = user_agents.parse(request.META['HTTP_USER_AGENT'])
     visit.browser_name = ua.browser.family
     visit.browser_version = ua.browser.version_string
     if Visits.objects.filter(ip__exact=request.META['REMOTE_ADDR']).exists():
         lastVisit = Visits.objects.filter(ip__exact=request.META['REMOTE_ADDR']).order_by('-datetime')[:1][0] 
-        if datetime.now() - timedelta(minutes=5) > lastVisit.datetime:
+        if timezone.now() - timedelta(minutes=5) > lastVisit.datetime:
             session = Sessions(ip=request.META['REMOTE_ADDR'], datetime=datetime.now())
             session.save()
         else:
@@ -40,7 +41,10 @@ def getTodaySessions():
     return Sessions.objects.filter(datetime__gte=date.today())
 
 def getLastSessionDatetime():
-    return Sessions.objects.order_by('-datetime').values('datetime')[:1][0]['datetime'].strftime('%d.%m.%Y %H:%M:%S')
+    utc_datetime = Sessions.objects.order_by('-datetime').values('datetime')[:1][0]['datetime']
+    formatted = timezone.localtime(utc_datetime).strftime('%d.%m.%Y %H:%M:%S')
+    return formatted
+
 
 def getAllVisitsFromSession(pk):
     if not Sessions.objects.filter(pk=pk).exists():
