@@ -50,3 +50,17 @@
     margin: auto;
     display: none;
 }
+
+@media screen and (max-width: 1200px) {
+    
+    .views-left-list {
+        float: none;
+        width: 99%;
+        height: 100px;
+    }
+    
+    .views-right-list {
+        margin-left: 5px; 
+        margin-top: 10px;
+    }
+}
