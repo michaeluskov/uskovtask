@@ -4,7 +4,7 @@
 @media screen {
 	body {
 		font-family: 'Noto Sans', sans-serif;
-	}
+	}	
 
 	.left-top-corner {
 		position: absolute;
@@ -123,6 +123,10 @@
 		background: #f0f0f0;
 		color: #996600;
 		clear: both;
+	}
+	
+	.views-counter {
+		border: none;	
 	}
 }
 
