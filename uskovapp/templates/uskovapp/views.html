@@ -10,7 +10,7 @@
 {% block 'content' %}
     <div id="sessions-div" class="views-left-list">
         {% for session in sessions_list %}
-            <p>{{ session.ip }} ({{ session.datetime|date:"j.m.Y H:i:s" }})</p>
+            <p>{{ session.ip }} ({{ session.datetime|date:"d.m.Y H:i:s" }})</p>
         {% endfor %}
     </div>
     <div id='requests-div' class="views-right-list">
