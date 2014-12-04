@@ -61,7 +61,7 @@ WSGI_APPLICATION = 'uskovtask.wsgi.application'
 
 LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'UTC+6'
+TIME_ZONE = 'Asia/Yekaterinburg'
 
 USE_I18N = True
 
