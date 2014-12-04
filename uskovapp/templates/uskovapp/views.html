@@ -5,26 +5,18 @@
 
 {% block 'head-extra' %}
     <link rel="stylesheet" href="{% static 'views/css/views.css' %}">
+    <script src="{% static 'views/js/views.js' %}"></script>
 {% endblock %}
 
 {% block 'content' %}
     <div id="sessions-div" class="views-left-list">
         {% for session in sessions_list %}
-            <p>{{ session.ip }} ({{ session.datetime|date:"d.m.Y H:i:s" }})</p>
+            <p id={{ session.pk }}>{{ session.ip }} ({{ session.datetime|date:"d.m.Y H:i:s" }})</p>
         {% endfor %}
     </div>
     <div id='requests-div' class="views-right-list">
-        <table class="views-table">
-            <tr class="views-table-header">
-                <td>Дата</td>
-                <td>IP</td>
-                <td>URL</td>
-                <td>Браузер</td>
-                <td>Разрешение</td>
-            </tr>
-            <tr>
-            </tr>
-        </table>
+        <h2>Выберите сессию слева.</h2>
     </div>
     <div class="clearer"></div>
+    <img id='views-loading' class='views-loading' src="{% static 'views/icons/loading.gif' %}" alt="Loading">
 {% endblock %}
