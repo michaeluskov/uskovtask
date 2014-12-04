@@ -42,6 +42,13 @@ def getTodaySessions():
 def getLastSessionDatetime():
     return Sessions.objects.order_by('-datetime').values('datetime')[:1][0]['datetime'].strftime('%d.%m.%Y %H:%M:%S')
 
+def getAllVisitsFromSession(pk):
+    if not Sessions.objects.filter(pk=pk).exists():
+        return []
+    session = Sessions.objects.filter(pk=pk)[:1][0]
+    visits = session.visits_set.all()
+    return list(visits)
+
 def addExtraInfoToVisit(request, width, height):
     res_string = '%sx%s' % (width, height)
     lastReq = Visits.objects.filter(ip__exact=request.META['REMOTE_ADDR']).order_by('-datetime').all()[:1][0]

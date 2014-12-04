@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^views/image.png', uskovviews.views_image_view, name='views_image'),
     url(r'^views/addresolution', uskovviews.views_addresolution_view, name='views_addresolution'),
     url(r'^views/stats', uskovviews.views_view, name='views_view'),
+    url(r'^views/ajax_visits', uskovviews.ajax_visits_view, name='views_view')
     #url(r'^admin/', include(admin.site.urls)),
 )
 

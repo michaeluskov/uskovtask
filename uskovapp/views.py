@@ -1,5 +1,6 @@
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse
+from datetime import datetime
 import visits
 
 # Create your views here.
@@ -27,8 +28,17 @@ def error_view(request, error=200):
 
 def views_view(request):
     visits.addNewVisit(request)
-    sessions_list = visits.getAllSessions()
+    sessions_list = reversed(list(visits.getAllSessions()))
     return render(request, 'uskovapp/views.html', {'sessions_list': sessions_list})
+
+
+def ajax_visits_view(request):
+    try:
+        sessionVisits = visits.getAllVisitsFromSession(request.GET['id'])
+    except Exception as e:
+        sessionVisits = []
+    finally:
+        return render(request, 'uskovapp/views_session.html', {'visits': sessionVisits})
 
 
 def views_image_view(request):
