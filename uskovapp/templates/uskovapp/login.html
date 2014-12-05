@@ -24,12 +24,12 @@
                 <input type="password" name="password" value="" id="password">
                 </p>
                 <input type="submit" value="Войти" />
-                <input type="hidden" name="next" value="{{ request.get.next }}" />
+                <input type="hidden" name="next" value="{{ request.GET.next }}" />
             </form>
         </div>
         <div id="register-div" class="register-div">
             <h1>Регистрация:</h1>
-            <form action="" method="post">
+            <form action="{% url 'register' %}" method="post">
                 {% csrf_token %}
                 <p>
                 <label for="username">Логин:</label>
@@ -39,7 +39,7 @@
                 <input type="password" name="password" value="" id="password">
                 </p>
                 <input type="submit" value="Войти" />
-                <input type="hidden" name="next" value="{{ request.get.next }}" />
+                <input type="hidden" name="next" value="{{ request.GET.next }}" />
             </form>
         </div>
         <div class="clearer"></div>

@@ -5,7 +5,9 @@
 {% block 'content' %}
     {% if user.is_authenticated %}
         Вы залогинены как <b>{{ user.username }}</b>.
+        <br>
+        <a href="{% url 'logout' %}?next={{ request.path }}">Выйти</a>
     {% else %}
-        Вы не залогинены
+        Чтобы написать комментарий, <a href="{% url 'login' %}?next={{ request.path }}">войдите на сайт или зарегистрируйтесь</a>.
     {% endif %}
 {% endblock %}

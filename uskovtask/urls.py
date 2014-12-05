@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^accounts/login', authviews.login, 
         {'template_name': 'uskovapp/login.html'},
         name='login'),
+    url(r'^accounts/register', uskovviews.register_view, name='register'),
     url(r'^accounts/logout', authviews.logout, {'next_page': settings.LOGIN_URL}, name='logout'),
     url(r'^admin/', include(admin.site.urls)),
 )
