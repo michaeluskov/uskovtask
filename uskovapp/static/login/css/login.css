@@ -1,0 +1,27 @@
+.login-div {
+    text-align: center;
+    float: left;
+    width: 230px;
+}
+
+.register-div {
+    text-align: center;
+    margin-left: 250px;
+}
+
+.clearer {
+    clear: both;
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 800px) {
+    .login-div {
+        float: none;
+        width: 99%
+    }
+    
+    .register-div {
+       margin-left: 10px;    
+    }
+    
+}

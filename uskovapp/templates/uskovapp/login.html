@@ -1,0 +1,47 @@
+{% extends 'uskovapp/base.html' %}
+{% load staticfiles %}
+
+{% block 'title' %}Логин{% endblock %}
+
+{% block 'head-extra' %}
+    <link rel="stylesheet" href="{% static 'login/css/login.css' %}">
+{% endblock %}
+
+{% block 'content' %}
+    {% if user.is_authenticated %}
+        Вы залогинены как <b>{{ user.username }}</b>.
+        <br><a href="{% url 'logout' %}">Выйти</a>
+    {% else %}
+        <div id="login-div" class="login-div">
+            <h1>Вход:</h1>
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <p>
+                <label for="username">Логин:</label>
+                <input type="text" name="username" value="" id="username">
+                </p><p>
+                <label for="password">Пароль:</label>
+                <input type="password" name="password" value="" id="password">
+                </p>
+                <input type="submit" value="Войти" />
+                <input type="hidden" name="next" value="{{ request.get.next }}" />
+            </form>
+        </div>
+        <div id="register-div" class="register-div">
+            <h1>Регистрация:</h1>
+            <form action="" method="post">
+                {% csrf_token %}
+                <p>
+                <label for="username">Логин:</label>
+                <input type="text" name="username" value="" id="username">
+                </p><p>
+                <label for="password">Пароль:</label>
+                <input type="password" name="password" value="" id="password">
+                </p>
+                <input type="submit" value="Войти" />
+                <input type="hidden" name="next" value="{{ request.get.next }}" />
+            </form>
+        </div>
+        <div class="clearer"></div>
+    {% endif %}
+{% endblock %}

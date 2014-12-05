@@ -3,8 +3,8 @@
 {% block 'title' %}Комментарии{% endblock %}
 
 {% block 'content' %}
-    {% if request.user.is_authenticated %}
-        Вы залогинены как {{ request.user.username }}
+    {% if user.is_authenticated %}
+        Вы залогинены как <b>{{ user.username }}</b>.
     {% else %}
         Вы не залогинены
     {% endif %}

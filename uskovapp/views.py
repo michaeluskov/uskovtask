@@ -56,4 +56,5 @@ def views_addresolution_view(request):
 
 def comments_view(request):
     visits.addNewVisit(request)
-    return render(request, 'uskovapp/comments.html', {})
+    return render(request, 'uskovapp/comments.html')
+    
