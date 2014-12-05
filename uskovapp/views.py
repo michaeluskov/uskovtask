@@ -53,3 +53,7 @@ def views_addresolution_view(request):
         except:
             pass
     return HttpResponse(content="{'status': 'OK'}", content_type='application/json')
+
+def comments_view(request):
+    visits.addNewVisit(request)
+    return render(request, 'uskovapp/comments.html', {})

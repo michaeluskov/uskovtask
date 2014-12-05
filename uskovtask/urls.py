@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^views/addresolution', uskovviews.views_addresolution_view, name='views_addresolution'),
     url(r'^views/stats', uskovviews.views_view, name='views_view'),
     url(r'^views/ajax_visits', uskovviews.ajax_visits_view, name='views_ajax_visits'),  
+    url(r'^comments/', uskovviews.comments_view, name='comments'),
     url(r'^admin/', include(admin.site.urls)),
 )
 

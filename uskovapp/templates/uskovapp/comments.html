@@ -1,0 +1,11 @@
+{% extends 'uskovapp/base.html' %}
+
+{% block 'title' %}Комментарии{% endblock %}
+
+{% block 'content' %}
+    {% if request.user.is_authenticated %}
+        Вы залогинены как {{ request.user.username }}
+    {% else %}
+        Вы не залогинены
+    {% endif %}
+{% endblock %}
