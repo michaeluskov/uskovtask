@@ -11,6 +11,13 @@
     {% if not comments %} 
 	<h1>Такого комментария от Вас не существует.</h1>
     {% else %}
+	<h2>Редактировать</h2>
+	<form action="{% url 'edit_comment' %}" method="post">
+	     {% csrf_token %}
+	     <input type="hidden" name="id" value={{ comments.0.comment.pk }}>
+	     <textarea name="text" class="comments-text">{{ comments.0.text }}</textarea>
+	     <br><input type="submit" value="Редактировать!">
+	</form>
 	<hr class="comments-hr" >
 	<h2>История:</h2>
 	{% for commversion in comments %}

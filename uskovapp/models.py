@@ -31,6 +31,7 @@ class Visits(models.Model):
     
 class Comments(models.Model):
     user = models.ForeignKey(User)
+    datetime = models.DateTimeField()
     
     def getActualCommentVersion(self):
         try:

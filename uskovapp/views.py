@@ -66,7 +66,7 @@ def views_addresolution_view(request):
 def comments_view(request):
     visits.addNewVisit(request)
     actualPKs = CommentVersions.objects.values('comment__id').annotate(actual=Max('id')).values('actual')
-    commentQuery = CommentVersions.objects.filter(pk__in=actualPKs).order_by('-datetime')
+    commentQuery = CommentVersions.objects.filter(pk__in=actualPKs).order_by('-comment__datetime')
     return render(request, 'uskovapp/comments.html', {'comments': commentQuery})
 
 
@@ -94,7 +94,7 @@ def add_comment_view(request):
     try:
         if request.POST.get('text', '') == '':
             return HttpResponseRedirect(reverse('comments'))
-        comment = Comments(user=request.user)
+        comment = Comments(user=request.user, datetime=timezone.datetime.now())
         comment.save()
         version = CommentVersions(comment=comment, text=request.POST['text'], datetime=timezone.datetime.now())
         version.save()
@@ -104,9 +104,25 @@ def add_comment_view(request):
     
 def comment_history_view(request):
     try:
+        visits.addNewVisit(request)
         versions = CommentVersions.objects.filter(comment__user=request.user, 
                                                   comment__pk = request.GET['id']).order_by('-datetime')
         return render(request, 'uskovapp/comment_history.html', {'comments': versions})
+    except Exception as e:
+        return HttpResponseRedirect(reverse('comments'))
+    
+
+def edit_comment_view(request):
+    if request.method != 'POST' or not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('comments'))
+    try:
+        if request.POST.get('text', '') == '':
+            return HttpResponseRedirect(reverse('comments'))        
+        comment = Comments.objects.filter(user=request.user,
+                                          pk=request.POST['id'])[0]
+        comment.commentversions_set.create(datetime=timezone.datetime.now(),
+                                           text=request.POST['text'])
+        return HttpResponseRedirect(reverse('comments'))
     except Exception as e:
         return HttpResponseRedirect(reverse('comments'))
     

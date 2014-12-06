@@ -9,7 +9,7 @@
 
 {% block 'content' %}
     {% if user.is_authenticated %}
-        Вы залогинены как <b>{{ user.username }}</b>.
+        Вы на сайте под именем <b>{{ user.username }}</b>.
         <br>
         <a href="{% url 'logout' %}?next={{ request.path }}">Выйти</a>
 	<br>
@@ -32,8 +32,10 @@
 	    <div class="right-bottom-corner"></div>
             <div class="comments-header">
                 {{ commversion.comment.user }} | 
-                {{ commversion.datetime|date:"d.m.Y H:i:s" }} |
-		<a href="{% url 'comment_history' %}?id={{ commversion.comment.pk}}">Редактировать</a>
+                {{ commversion.comment.datetime|date:"d.m.Y H:i:s" }}
+		{% if commversion.comment.user == request.user %}
+		| <a href="{% url 'comment_history' %}?id={{ commversion.comment.pk }}">Редактировать</a>
+		{% endif %}
             </div>
             <div class="comments-body">
                 {{ commversion.text }}
