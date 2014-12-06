@@ -57,7 +57,7 @@ class CommentVersions(models.Model):
     def bbcode_parsed(self):
         text = escape(self.text)
         regex = re.compile(r'\[i](.*?)\[\/i]', re.MULTILINE)
-        text = regex.sub('<i>\1</i>', text)
+        text = regex.sub(r'<i>\1</i>', text)
         regex = re.compile(r'\[b](.*?)\[\/b]', re.MULTILINE)
         text = regex.sub(r'<b>\1</b>', text)
         return text

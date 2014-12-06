@@ -20,6 +20,8 @@
 	     <textarea name="text" class="comments-text"></textarea>
 	     <br><input type="submit" value="Добавить!">
 	</form>
+	<br><b>[b]Текст[/b]</b> - Выделение текста жирным,
+	<br><b>[i]Текст[/i]</b> - Курсивный текст
     {% else %}
         Чтобы написать комментарий, <a href="{% url 'login' %}?next={{ request.path }}">войдите на сайт или зарегистрируйтесь</a>.
     {% endif %}
