@@ -1,6 +1,11 @@
 {% extends 'uskovapp/base.html' %}
+{% load staticfiles %}
 
 {% block 'title' %}Комментарии{% endblock %}
+
+{% block 'head-extra' %}
+    <link rel="stylesheet" href="{% static 'comments/css/comments.css' %}">
+{% endblock %}
 
 {% block 'content' %}
     {% if user.is_authenticated %}
@@ -10,4 +15,20 @@
     {% else %}
         Чтобы написать комментарий, <a href="{% url 'login' %}?next={{ request.path }}">войдите на сайт или зарегистрируйтесь</a>.
     {% endif %}
+    <hr class="comments-hr" >
+    {% for commversion in comments %}
+        <div id='comment-{{ commversion.comment.pk }}' class="comments-comment">
+	    <div class="left-top-corner"></div>
+	    <div class="right-top-corner"></div>
+	    <div class="left-bottom-corner"></div>
+	    <div class="right-bottom-corner"></div>
+            <div class="comments-header">
+                {{ commversion.comment.user }} | 
+                {{ commversion.datetime|date:"d.m.Y H:i:s" }}
+            </div>
+            <div class="comments-body">
+                {{ commversion.text }}
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
