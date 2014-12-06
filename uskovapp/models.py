@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.html import escape
+import re
 
 # Create your models here.
 
@@ -52,6 +54,13 @@ class CommentVersions(models.Model):
     datetime = models.DateTimeField()
     text = models.CharField(max_length=5000)
     
+    def bbcode_parsed(self):
+        text = escape(self.text)
+        regex = re.compile(r'\[i](.*?)\[\/i]', re.MULTILINE)
+        text = regex.sub('<i>\1</i>', text)
+        regex = re.compile(r'\[b](.*?)\[\/b]', re.MULTILINE)
+        text = regex.sub(r'<b>\1</b>', text)
+        return text
        
     def __unicode__(self):
         return "%s %s %s" % (unicode(self.comment.user.username),

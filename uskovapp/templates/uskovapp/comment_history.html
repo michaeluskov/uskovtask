@@ -31,7 +31,7 @@
 		    {{ commversion.datetime|date:"d.m.Y H:i:s" }}
 		</div>
 		<div class="comments-body">
-		    {{ commversion.text }}
+		    {{ commversion.bbcode_parsed|safe|linebreaksbr }}
 		</div>
 	    </div>
 	{% endfor %}
