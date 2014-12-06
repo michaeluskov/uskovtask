@@ -94,6 +94,10 @@ def add_comment_view(request):
     try:
         if request.POST.get('text', '') == '':
             return HttpResponseRedirect(reverse('comments'))
+        if Comments.objects.filter(user=request.user,
+                                   datetime__gte=timezone.datetime.now() \
+                                   -timezone.timedelta(minutes=1)).exists():
+            return HttpResponseRedirect(reverse('comments'))
         comment = Comments(user=request.user, datetime=timezone.datetime.now())
         comment.save()
         version = CommentVersions(comment=comment, text=request.POST['text'], datetime=timezone.datetime.now())
