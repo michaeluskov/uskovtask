@@ -1,0 +1,21 @@
+.comments-comment {
+    position: relative;
+    background:  #f0f0f0;
+    margin: 10px;
+    border: 1px solid;
+    padding: 10px;
+}
+
+.comments-hr {
+    border: none;
+    height: 1px;
+    background-color: #996600;
+    color: #996600;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.comments-header {
+    text-align: right;
+    font-size: small;
+}
