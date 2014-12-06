@@ -32,7 +32,8 @@
 	    <div class="right-bottom-corner"></div>
             <div class="comments-header">
                 {{ commversion.comment.user }} | 
-                {{ commversion.datetime|date:"d.m.Y H:i:s" }}
+                {{ commversion.datetime|date:"d.m.Y H:i:s" }} |
+		<a href="{% url 'comment_history' %}?id={{ commversion.comment.pk}}">Редактировать</a>
             </div>
             <div class="comments-body">
                 {{ commversion.text }}

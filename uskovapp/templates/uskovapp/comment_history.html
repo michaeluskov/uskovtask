@@ -1,0 +1,32 @@
+{% extends 'uskovapp/base.html' %}
+{% load staticfiles %}
+
+{% block 'title' %}Редактировать комментарий{% endblock %}
+
+{% block 'head-extra' %}
+    <link rel="stylesheet" href="{% static 'comments/css/comments.css' %}">
+{% endblock %}
+
+{% block 'content' %}
+    {% if not comments %} 
+	<h1>Такого комментария от Вас не существует.</h1>
+    {% else %}
+	<hr class="comments-hr" >
+	<h2>История:</h2>
+	{% for commversion in comments %}
+	    <div id='comment-{{ commversion.comment.pk }}' class="comments-comment">
+		<div class="left-top-corner"></div>
+		<div class="right-top-corner"></div>
+		<div class="left-bottom-corner"></div>
+		<div class="right-bottom-corner"></div>
+		<div class="comments-header">
+		    {{ commversion.comment.user }} | 
+		    {{ commversion.datetime|date:"d.m.Y H:i:s" }}
+		</div>
+		<div class="comments-body">
+		    {{ commversion.text }}
+		</div>
+	    </div>
+	{% endfor %}
+    {% endif %}
+{% endblock %}

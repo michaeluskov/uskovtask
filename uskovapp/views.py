@@ -102,3 +102,11 @@ def add_comment_view(request):
     except Exception as e:
         return HttpResponseRedirect(reverse('comments'))
     
+def comment_history_view(request):
+    try:
+        versions = CommentVersions.objects.filter(comment__user=request.user, 
+                                                  comment__pk = request.GET['id']).order_by('-datetime')
+        return render(request, 'uskovapp/comment_history.html', {'comments': versions})
+    except Exception as e:
+        return HttpResponseRedirect(reverse('comments'))
+    
