@@ -14,7 +14,7 @@
         <a href="{% url 'logout' %}?next={{ request.path }}">Выйти</a>
 	<br>
 	<hr class="comments-hr" >
-	<form action="{% url 'add_comment' %}" method="post">
+	<form action="{% url 'add_comment' %}" method="post" accept-charset="utf-8">
 	     <p>Оставить комментарий:</p>
 	     {% csrf_token %}
 	     <textarea name="text" class="comments-text"></textarea>
