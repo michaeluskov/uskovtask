@@ -3,6 +3,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.db.models import Max
+from django.core.urlresolvers import reverse
+from django.utils import timezone
+
+from uskovapp.models import Comments, CommentVersions
 import visits
 
 # Create your views here.
@@ -60,7 +65,9 @@ def views_addresolution_view(request):
 
 def comments_view(request):
     visits.addNewVisit(request)
-    return render(request, 'uskovapp/comments.html')
+    actualPKs = CommentVersions.objects.values('comment__id').annotate(actual=Max('id')).values('actual')
+    commentQuery = CommentVersions.objects.filter(pk__in=actualPKs).order_by('-datetime')
+    return render(request, 'uskovapp/comments.html', {'comments': commentQuery})
 
 
 def register_view(request):
@@ -79,4 +86,19 @@ def register_view(request):
             return HttpResponseRedirect(redirect_url)
     except Exception as e:
         return HttpResponseRedirect(redirect_url)
+    
+    
+def add_comment_view(request):
+    if request.method != 'POST' or not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('comments'))
+    try:
+        if request.POST.get('text', '') == '':
+            return HttpResponseRedirect(reverse('comments'))
+        comment = Comments(user=request.user)
+        comment.save()
+        version = CommentVersions(comment=comment, text=request.POST['text'], datetime=timezone.datetime.now())
+        version.save()
+        return HttpResponseRedirect(reverse('comments'))
+    except Exception as e:
+        return HttpResponseRedirect(reverse('comments'))
     

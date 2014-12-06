@@ -19,3 +19,9 @@
     text-align: right;
     font-size: small;
 }
+
+.comments-text {
+    width: 90%;
+    height: 50px;
+    resize: none;
+}
