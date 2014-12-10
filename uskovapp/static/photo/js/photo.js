@@ -286,6 +286,10 @@ var addEvent = function(object, event, handler) {
 addEvent(window, 'load', init);
 
 var ie8DirtyHacks = function() {
+     window.onhelp = function() {
+            if (photoViewMode)
+                return false;
+        };
     if ('attachEvent' in window) {
         window.onhelp = function() {
             if (photoViewMode)
