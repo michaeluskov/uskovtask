@@ -103,7 +103,7 @@ var toggleHelp = function() {
     if (!photoViewMode)
         return;
     var help = document.getElementById('photo-help');
-    help.style.display = (help.style.display == 'none') ? 'block' : 'none';
+    help.style.display = (help.style.display == 'none' || !help.style.display) ? 'block' : 'none';
 };
 
 var getImgNode = function(i) {
