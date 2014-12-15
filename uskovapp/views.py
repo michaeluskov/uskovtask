@@ -130,3 +130,6 @@ def edit_comment_view(request):
     except Exception as e:
         return HttpResponseRedirect(reverse('comments'))
     
+    
+def polls_view(request):
+    return render(request, 'uskovapp/polls.html')
