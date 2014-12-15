@@ -66,3 +66,28 @@ class CommentVersions(models.Model):
         return "%s %s %s" % (unicode(self.comment.user.username),
                              unicode(self.datetime.strftime('%d/%m/%y %H:%M:%S')),
                              unicode(self.text))
+    
+class Polls(models.Model):
+    text = models.CharField(max_length=400)
+    
+    def __unicode__(self):
+        return unicode(self.text)
+
+    
+class PollVariants(models.Model):
+    poll = models.ForeignKey(Polls)
+    variant_text = models.CharField(max_length=400)
+    
+    def __unicode__(self):
+        return unicode(self.variant_text)
+    
+    
+    
+class Votes(models.Model):
+    variant = models.ForeignKey(PollVariants)
+    user = models.ForeignKey(User)
+    datetime = models.DateTimeField(auto_now=True)
+    
+    def __unicode__(self):
+        return "%s %s %s" % (unicode(self.user), unicode(self.variant.poll), unicode(self.variant))
+    
