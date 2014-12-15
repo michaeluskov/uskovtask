@@ -10,6 +10,15 @@ class CommentVersionInline(admin.TabularInline):
 
 class CommentsAdmin(admin.ModelAdmin):
     inlines = [CommentVersionInline]
+
+    
+class VariantInline(admin.TabularInline):
+    model = models.PollVariants
+
+    
+class PollAdmin(admin.ModelAdmin):
+    inlines = [VariantInline]
     
 
 admin.site.register(models.Comments, CommentsAdmin)
+admin.site.register(models.Polls, PollAdmin)
