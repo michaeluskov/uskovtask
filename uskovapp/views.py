@@ -3,11 +3,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
-from django.db.models import Max
+from django.db.models import Max, Count
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 
-from uskovapp.models import Comments, CommentVersions
+from uskovapp.models import Comments, CommentVersions, Polls, PollVariants, Votes
 import visits
 
 # Create your views here.
@@ -132,4 +132,8 @@ def edit_comment_view(request):
     
     
 def polls_view(request):
-    return render(request, 'uskovapp/polls.html')
+    polls = Polls.objects.all().annotate(votes_count=Count('pollvariants__votes'))
+    polls_user_voted = Votes.objects.filter(user__username=request.user.username).values('variant__poll__pk')
+    return render(request, 'uskovapp/polls.html', {'polls': polls,
+                                                   'polls_user_voted': polls_user_voted
+                                                   })

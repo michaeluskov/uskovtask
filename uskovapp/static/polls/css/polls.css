@@ -1,0 +1,44 @@
+.polls-hr {
+    border: none;
+    height: 1px;
+    background-color: #996600;
+    color: #996600;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.polls-wrapper {
+    position: relative;
+    background:  #FAFAFA;
+    margin: 10px;
+    border: 1px solid;
+    padding: 10px;
+}
+
+.polls-wrapper h3 {
+    margin: 3px;
+}
+
+.polls-clickable-div {
+    padding: 3px;
+    cursor: pointer;
+    border: 1px solid;
+    margin: 5px;
+}
+
+.polls-clickable-div:hover {
+    background: #f0f0f0;
+}
+
+.polls-inactive-div {
+    padding: 3px;
+    border: 1px solid;
+    background: #f0f0f0;
+    margin: 5px;
+}
+
+.polls-active-div {
+    padding: 3px;
+    border: 1px solid;
+    margin: 5px;
+}
