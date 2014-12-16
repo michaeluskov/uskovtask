@@ -137,3 +137,9 @@ def polls_view(request):
     return render(request, 'uskovapp/polls.html', {'polls': polls,
                                                    'polls_user_voted': polls_user_voted
                                                    })
+
+def polls_vote_view(request):
+    return render(request, 'uskovapp/onepoll.html')
+
+def polls_unvote_view(request):
+    return render(request, 'uskovapp/onepoll.html')

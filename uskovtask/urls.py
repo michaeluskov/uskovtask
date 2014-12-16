@@ -23,6 +23,8 @@ urlpatterns = patterns('',
     url(r'^accounts/login', authviews.login, {'template_name': 'uskovapp/login.html'}, name='login'),
     url(r'^accounts/register', uskovviews.register_view, name='register'),
     url(r'^accounts/logout', authviews.logout, {'next_page': settings.LOGIN_URL}, name='logout'),
+    url(r'^polls/vote', uskovviews.polls_vote_view, name='polls_vote'),
+    url(r'^polls/unvote', uskovviews.polls_unvote_view, name='polls_unvote'),
     url(r'^polls/', uskovviews.polls_view, name='polls'),
     url(r'^admin/', include(admin.site.urls)),
 )

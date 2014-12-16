@@ -1,0 +1,20 @@
+{% load staticfiles %}
+
+<div class="left-top-corner"></div>
+<div class="right-top-corner"></div>
+<div class="left-bottom-corner"></div>
+<div class="right-bottom-corner"></div>
+<h3>{{ poll.text }}</h3>
+<br>
+{% if user.is_authenticated %}
+	{% if not user_voted %}
+		{% for variant in poll.pollvariants_set.all %}
+		<div id="polls-vote-{{ poll.pk }}-{{ variant.pk }}" class="polls-clickable-div">{{ variant.variant_text }}</div>
+		{% endfor %}
+	{% else %}
+		<div id="polls-unvote-{{ poll.pk }}" class="polls-clickable-div">Снять голос</div>
+	{% endif %}
+{% endif %}
+<div class="polls-loading-font" id="polls-loading-{{ poll.pk }}">
+	<img class="polls-loading-img" src="{% static 'polls/icons/loading.gif' %}" alt="Loading">
+</div>
