@@ -1,5 +1,22 @@
 var isLoading = 0;
 
+var getXmlHttp = function() {
+  var xmlhttp;
+  try {
+    xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+  } catch (e) {
+    try {
+      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    } catch (E) {
+      xmlhttp = false;
+    }
+  }
+  if (!xmlhttp && typeof XMLHttpRequest!='undefined') {
+    xmlhttp = new XMLHttpRequest();
+  }
+  return xmlhttp;
+};
+
 var ajaxGet = function(link, cb) {
     var xmlhttp = getXmlHttp()
     xmlhttp.open('GET', link, true);
@@ -18,6 +35,11 @@ var vote = function(poll, variant) {
         return;
     isLoading = 1;
     showLoading(poll);
+    ajaxGet('/polls/vote?poll='+poll+'&variant='+variant, function(res) {
+        document.getElementById('polls-wrapper-'+poll).innerHTML = res;
+        setOnclicks();
+        isLoading = 0;
+    });
 };
 
 var unvote = function(poll) {
@@ -25,6 +47,11 @@ var unvote = function(poll) {
         return;
     isLoading = 1;
     showLoading(poll);
+    ajaxGet('/polls/unvote?poll='+poll, function(res) {
+        document.getElementById('polls-wrapper-'+poll).innerHTML = res;
+        setOnclicks();
+        isLoading = 0;
+    });
 };
 
 var showLoading = function(poll) {
@@ -42,7 +69,7 @@ var setOnclicks = function() {
         if (sets.length != 1 || sets[0] == 'polls') {
             if (sets[1] == 'vote') 
                 elements[i].onclick = (function(p,v) {return function(){ vote(p,v) }})(sets[2], sets[3]);
-            if (sets[2] == 'unvote')
+            if (sets[1] == 'unvote')
                 elements[i].onclick = (function(p) {return function(){ unvote(p) }})(sets[2]);  
         }
     }

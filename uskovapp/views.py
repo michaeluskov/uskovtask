@@ -132,6 +132,7 @@ def edit_comment_view(request):
     
     
 def polls_view(request):
+    visits.addNewVisit(request);
     polls = Polls.objects.all().annotate(votes_count=Count('pollvariants__votes'))
     polls_user_voted = Votes.objects.filter(user__username=request.user.username).values('variant__poll__pk')
     polls_user_voted = [i['variant__poll__pk'] for i in polls_user_voted]
@@ -158,7 +159,8 @@ def polls_unvote_view(request):
     if ('poll' not in request.GET):
             return HttpResponse(content='')
     poll_pk = request.GET['poll']
-    Votes.objects.filter(user__username = request.user.username, variant__poll__pk = poll_pk).delete()
+    Votes.objects.filter(user__username = request.user.username, 
+                         variant__poll__pk = poll_pk).delete()
     if not Polls.objects.filter(pk=poll_pk).exists():
         return HttpResponse(content='')
     poll = Polls.objects.get(pk=poll_pk)
