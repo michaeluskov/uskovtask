@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load decorators %}
 
 <div class="left-top-corner"></div>
 <div class="right-top-corner"></div>
@@ -16,7 +17,8 @@
 	{% endif %}
 {% endif %}
 <br>
-<img src="{% url 'polls_pic' poll.pk %}" id="polls-image-{{ poll.pk }}" alt="Результаты">
+{% random_number as rand %}
+<img src="{% url 'polls_pic' poll.pk %}#{{ rand }}" id="polls-image-{{ poll.pk }}" alt="Результаты">
 <div class="polls-loading-font" id="polls-loading-{{ poll.pk }}">
 	<img class="polls-loading-img" src="{% static 'polls/icons/loading.gif' %}" alt="Loading">
 </div>
