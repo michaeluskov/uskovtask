@@ -15,6 +15,8 @@
 		<div id="polls-unvote-{{ poll.pk }}" class="polls-clickable-div">Снять голос</div>
 	{% endif %}
 {% endif %}
+<br>
+<img src="{% url 'polls_pic' poll.pk %}?{{ rand }}" alt="Результаты">
 <div class="polls-loading-font" id="polls-loading-{{ poll.pk }}">
 	<img class="polls-loading-img" src="{% static 'polls/icons/loading.gif' %}" alt="Loading">
 </div>

@@ -6,6 +6,8 @@ from django.contrib.auth import authenticate, login
 from django.db.models import Max, Count
 from django.core.urlresolvers import reverse
 from django.utils import timezone
+from django.views.decorators.cache import cache_control
+import random
 
 from uskovapp.models import Comments, CommentVersions, Polls, PollVariants, Votes
 from uskovapp.poll_picture import createPollPic
@@ -50,6 +52,7 @@ def ajax_visits_view(request):
         return render(request, 'uskovapp/views_session.html', {'visits': sessionVisits})
 
 
+@cache_control(max_age=0, no_cache=True, no_store=True, must_revalidate=True)
 def views_image_view(request):
     image = visits.getImage()
     return HttpResponse(content=image, content_type='image/png')
@@ -148,13 +151,15 @@ def polls_vote_view(request):
     variant_pk = request.GET.get('variant',-1)
     if Votes.objects.filter(user__username = request.user.username, variant__poll__pk = poll_pk).exists():
         poll = Polls.objects.get(pk=poll_pk)
-        return render(request, 'uskovapp/onepoll.html', {'poll': poll, 'user_voted': 1})
+        return render(request, 'uskovapp/onepoll.html', {'poll': poll, 
+                                                         'user_voted': 1})
     if not PollVariants.objects.filter(pk=variant_pk, poll_id=poll_pk).exists():
         return HttpResponse(content='')
     p = Votes(user = request.user, variant_id = variant_pk, datetime = timezone.now())
     p.save()
     poll = Polls.objects.get(pk=poll_pk)
-    return render(request, 'uskovapp/onepoll.html', {'poll': poll, 'user_voted': 1})
+    return render(request, 'uskovapp/onepoll.html', {'poll': poll, 
+                                                     'user_voted': 1})
 
 def polls_unvote_view(request):
     if ('poll' not in request.GET):
@@ -165,8 +170,10 @@ def polls_unvote_view(request):
     if not Polls.objects.filter(pk=poll_pk).exists():
         return HttpResponse(content='')
     poll = Polls.objects.get(pk=poll_pk)
-    return render(request, 'uskovapp/onepoll.html', {'poll': poll, 'user_voted': 0})
+    return render(request, 'uskovapp/onepoll.html', {'poll': poll, 
+                                                     'user_voted': 0})
 
+@cache_control(max_age=0, no_cache=True, no_store=True, must_revalidate=True)
 def polls_pic_view(request, poll_pk):
     if not Polls.objects.filter(pk=poll_pk).exists():
         raise Http404
