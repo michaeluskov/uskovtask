@@ -66,7 +66,7 @@ var setOnclicks = function() {
     var elements = document.getElementsByTagName('DIV');
     for (var i=0; i<elements.length; i++) {
         var sets = elements[i].id.split('-');
-        if (sets.length != 1 || sets[0] == 'polls') {
+        if (sets.length != 1 && sets[0] == 'polls') {
             if (sets[1] == 'vote') 
                 elements[i].onclick = (function(p,v) {return function(){ vote(p,v) }})(sets[2], sets[3]);
             if (sets[1] == 'unvote')
@@ -75,8 +75,19 @@ var setOnclicks = function() {
     }
 };
 
+var updateResultPics = function() {
+    var els = document.getElementsByTagName('IMG');
+    for (var i=0; i<els.length; i++) {
+        var sets = els[i].id.split('-');
+        if (sets.length != 1 && sets[0] == 'polls' && sets[1] =='image') {
+            els[i].src = '/polls/pic/' + sets[2] + '.png#' + new Date().getTime();
+        }
+    }
+};
+
 var init = function() {
     setOnclicks();    
+    setInterval(updateResultPics, 3000);
 };
 
 window.onload = init;
