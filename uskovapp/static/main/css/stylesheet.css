@@ -125,6 +125,11 @@
 		clear: both;
 	}
 	
+	.footer a:link, .footer a:visited, .footer a:hover, .footer a:active {
+		color: #996600;
+		text-decoration: none;
+	}
+	
 	.views-counter {
 		border: none;	
 	}
