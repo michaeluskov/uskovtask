@@ -1,5 +1,5 @@
 from django.shortcuts import render, render_to_response
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 from django.utils import timezone
 
 from uskovapp.models import Comments, CommentVersions, Polls, PollVariants, Votes
+from uskovapp.poll_picture import createPollPic
 import visits
 
 # Create your views here.
@@ -165,3 +166,9 @@ def polls_unvote_view(request):
         return HttpResponse(content='')
     poll = Polls.objects.get(pk=poll_pk)
     return render(request, 'uskovapp/onepoll.html', {'poll': poll, 'user_voted': 0})
+
+def polls_pic_view(request, poll_pk):
+    if not Polls.objects.filter(pk=poll_pk).exists():
+        raise Http404
+    pic = createPollPic(poll_pk)
+    return HttpResponse(content=pic, content_type='image/png')
