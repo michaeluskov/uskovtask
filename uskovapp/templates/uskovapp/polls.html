@@ -27,7 +27,7 @@
 <h3>{{ poll.text }}</h3>
 <br>
 {% if user.is_authenticated %}
-	{% if poll not in polls_user_voted %}
+	{% if poll.pk not in polls_user_voted %}
 		{% for variant in poll.pollvariants_set.all %}
 		<div id="polls-vote-{{ poll.pk }}-{{ variant.pk }}" class="polls-clickable-div">{{ variant.variant_text }}</div>
 		{% endfor %}

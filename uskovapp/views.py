@@ -110,7 +110,7 @@ def comment_history_view(request):
     try:
         visits.addNewVisit(request)
         versions = CommentVersions.objects.filter(comment__user=request.user, 
-                                                  comment__pk = request.GET['id']).order_by('-datetime')
+                                                  comment__pk=request.GET['id']).order_by('-datetime')
         return render(request, 'uskovapp/comment_history.html', {'comments': versions})
     except Exception as e:
         return HttpResponseRedirect(reverse('comments'))
@@ -134,12 +134,32 @@ def edit_comment_view(request):
 def polls_view(request):
     polls = Polls.objects.all().annotate(votes_count=Count('pollvariants__votes'))
     polls_user_voted = Votes.objects.filter(user__username=request.user.username).values('variant__poll__pk')
+    polls_user_voted = [i['variant__poll__pk'] for i in polls_user_voted]
     return render(request, 'uskovapp/polls.html', {'polls': polls,
                                                    'polls_user_voted': polls_user_voted
                                                    })
 
 def polls_vote_view(request):
-    return render(request, 'uskovapp/onepoll.html')
+    if ('poll' not in request.GET or 'variant' not in request.GET):
+        return HttpResponse(content='')
+    poll_pk = request.GET.get('poll',-1)
+    variant_pk = request.GET.get('variant',-1)
+    if Votes.objects.filter(user__username = request.user.username, variant__poll__pk = poll_pk).exists():
+        poll = Polls.objects.get(pk=poll_pk)
+        return render(request, 'uskovapp/onepoll.html', {'poll': poll, 'user_voted': 1})
+    if not PollVariants.objects.filter(pk=variant_pk, poll_id=poll_pk).exists():
+        return HttpResponse(content='')
+    p = Votes(user = request.user, variant_id = variant_pk, datetime = timezone.now())
+    p.save()
+    poll = Polls.objects.get(pk=poll_pk)
+    return render(request, 'uskovapp/onepoll.html', {'poll': poll, 'user_voted': 1})
 
 def polls_unvote_view(request):
-    return render(request, 'uskovapp/onepoll.html')
+    if ('poll' not in request.GET):
+            return HttpResponse(content='')
+    poll_pk = request.GET['poll']
+    Votes.objects.filter(user__username = request.user.username, variant__poll__pk = poll_pk).delete()
+    if not Polls.objects.filter(pk=poll_pk).exists():
+        return HttpResponse(content='')
+    poll = Polls.objects.get(pk=poll_pk)
+    return render(request, 'uskovapp/onepoll.html', {'poll': poll, 'user_voted': 0})
