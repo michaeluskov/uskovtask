@@ -17,8 +17,8 @@
 	{% endif %}
 {% endif %}
 <br>
-{% random_number as rand %}
-<img src="{% url 'polls_pic' poll.pk %}#{{ rand }}" id="polls-image-{{ poll.pk }}" alt="Результаты">
+{% random_number 10 as rand %}
+<img src="{% url 'polls_pic' poll.pk %}?{{ rand }}#{{ rand }}" id="polls-image-{{ poll.pk }}" alt="Результаты">
 <div class="polls-loading-font" id="polls-loading-{{ poll.pk }}">
 	<img class="polls-loading-img" src="{% static 'polls/icons/loading.gif' %}" alt="Loading">
 </div>
