@@ -19,7 +19,7 @@
 {% endif %}
 <hr class="polls-hr">
 {% for poll in polls %}
-<div class="polls-wrapper" id="poll-{{ poll.pk }}">
+<div class="polls-wrapper" id="poll-wrapper-{{ poll.pk }}">
 <div class="left-top-corner"></div>
 <div class="right-top-corner"></div>
 <div class="left-bottom-corner"></div>
@@ -29,12 +29,15 @@
 {% if user.is_authenticated %}
 	{% if poll not in polls_user_voted %}
 		{% for variant in poll.pollvariants_set.all %}
-		<div id="poll-{{ poll.pk }}-{{ variant.pk }}" class="polls-clickable-div">{{ variant.variant_text }}</div>
+		<div id="polls-vote-{{ poll.pk }}-{{ variant.pk }}" class="polls-clickable-div">{{ variant.variant_text }}</div>
 		{% endfor %}
 	{% else %}
-		<div id="poll-{{ poll.pk }}-unvote" class="polls-clickable-div">Снять голос</div>
+		<div id="polls-unvote-{{ poll.pk }}" class="polls-clickable-div">Снять голос</div>
 	{% endif %}
 {% endif %}
+<div class="polls-loading-font" id="polls-loading-{{ poll.pk }}">
+	<img class="polls-loading-img" src="{% static 'polls/icons/loading.gif' %}" alt="Loading">
+</div>
 </div>
 {% endfor %}
 
